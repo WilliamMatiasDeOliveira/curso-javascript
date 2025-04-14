@@ -1,4 +1,4 @@
-// function call oder function
+// function call other function
 
 function run(fn){
     return fn()
