@@ -12,4 +12,4 @@ const avg = (acc, el, i, array) => {
     }
 }
 
-const result = (numbers.reduce(avg))
+console.log(numbers.reduce(avg))
