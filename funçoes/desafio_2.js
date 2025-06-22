@@ -6,18 +6,29 @@ const carrinho = [
     { nome: 'Tesoura', qtde: 1, preco: 19.20, fragil: true },
 ]
 
+Array.prototype.meuReduce = function(fn, inicial) {
+    let acc = inicial
+    for(let i = 0; i < this.length; i++) {
+        if(!acc && i === 0) {
+            acc = this[i]
+        } else{
+            acc = fn(acc, this[i], i, this)
+        }
+    }
+    return acc
+}
+
 // filter, map, reduce
 
 // 1. fragil: true
 // 2. qtde * preco -> total
 // 3. media totais
 
-const Fragil = item => item.fragil
+const fragil = item => item.fragil
 const getTotal = item => item.qtde * item.preco
 const getMedia = (acc, el) => {
         const novaQtde = acc.qtde + 1
         const novoTotal = acc.total + el
-        console.log(acc, el)
         return {
             qtde: novaQtde,
             total: novoTotal,
@@ -27,9 +38,9 @@ const getMedia = (acc, el) => {
 const mediaInicial =  { qtde: 0, total: 0, media: 0 }
 
 const media = carrinho
-    .filter(Fragil)
+    .filter(fragil)
     .map(getTotal)
     .reduce(getMedia, mediaInicial)
     .media
 
-console.log(`A médiaé ${media}!`)
+console.log(`A média é ${media}!`)
